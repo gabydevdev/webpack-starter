@@ -41,11 +41,6 @@ module.exports = {
       {
         test: /\.hbs$/i,
         loader: 'handlebars-loader',
-        options: {
-          partialsDir: [
-            Path.join(__dirname, '../src/partials'),
-          ],
-        },
       },
       {
         test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,

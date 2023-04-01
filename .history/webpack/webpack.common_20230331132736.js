@@ -23,7 +23,7 @@ module.exports = {
       patterns: [{ from: Path.resolve(__dirname, '../public'), to: 'public' }],
     }),
     new HtmlWebpackPlugin({
-      template: Path.resolve(__dirname, '../src/index.hbs'),
+      template: Path.resolve(__dirname, '../src/index.handlebars'),
     }),
   ],
   resolve: {
@@ -39,13 +39,8 @@ module.exports = {
         type: 'javascript/auto',
       },
       {
-        test: /\.hbs$/i,
+        test: /\.handlebars$/i,
         loader: 'handlebars-loader',
-        options: {
-          partialsDir: [
-            Path.join(__dirname, '../src/partials'),
-          ],
-        },
       },
       {
         test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,

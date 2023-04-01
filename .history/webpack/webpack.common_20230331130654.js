@@ -22,8 +22,14 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [{ from: Path.resolve(__dirname, '../public'), to: 'public' }],
     }),
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        handlebarsLoader: {}
+      }
+    }),
     new HtmlWebpackPlugin({
-      template: Path.resolve(__dirname, '../src/index.hbs'),
+      template: Path.resolve(__dirname, '../src/index.handlebars'),
+      // template: Path.resolve(__dirname, '../src/index.html'),
     }),
   ],
   resolve: {
@@ -39,13 +45,10 @@ module.exports = {
         type: 'javascript/auto',
       },
       {
-        test: /\.hbs$/i,
-        loader: 'handlebars-loader',
-        options: {
-          partialsDir: [
-            Path.join(__dirname, '../src/partials'),
-          ],
-        },
+        test: /\.handlebars$/,
+        loader: "handlebars-loader",
+        // test: /\.html$/i,
+        // loader: 'html-loader',
       },
       {
         test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,

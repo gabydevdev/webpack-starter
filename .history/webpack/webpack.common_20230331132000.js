@@ -23,7 +23,8 @@ module.exports = {
       patterns: [{ from: Path.resolve(__dirname, '../public'), to: 'public' }],
     }),
     new HtmlWebpackPlugin({
-      template: Path.resolve(__dirname, '../src/index.hbs'),
+      template: Path.resolve(__dirname, '../src/index.handlebars'),
+      // template: Path.resolve(__dirname, '../src/index.html'),
     }),
   ],
   resolve: {
@@ -32,21 +33,25 @@ module.exports = {
     },
   },
   module: {
+    loaders: [
+      {
+        test: /\.handlebars$/,
+        loader: Path.resolve(__dirname, '../src/../'),
+        query: {
+          partialDirs: [Path.join(__dirname, 'src', 'partials')],
+        },
+      },
+    ],
     rules: [
       {
         test: /\.mjs$/,
         include: /node_modules/,
         type: 'javascript/auto',
       },
-      {
-        test: /\.hbs$/i,
-        loader: 'handlebars-loader',
-        options: {
-          partialsDir: [
-            Path.join(__dirname, '../src/partials'),
-          ],
-        },
-      },
+      // {
+      //   test: /\.html$/i,
+      //   loader: 'html-loader',
+      // },
       {
         test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,
         type: 'asset'
