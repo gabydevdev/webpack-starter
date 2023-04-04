@@ -41,6 +41,11 @@ module.exports = {
 	module: {
 		rules: [
 			{
+				test: /\.mjs$/,
+				include: /node_modules/,
+				type: 'javascript/auto',
+			},
+			{
 				test: /\.handlebars$/i,
 				loader: 'handlebars-loader',
 				/* options: {
@@ -48,11 +53,6 @@ module.exports = {
 						Path.join(__dirname, '../partials'),
 					],
 				}, */
-			},
-			{
-				test: /\.mjs$/,
-				include: /node_modules/,
-				type: 'javascript/auto',
 			},
 			{
 				test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,

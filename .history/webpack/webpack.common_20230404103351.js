@@ -23,23 +23,13 @@ module.exports = {
 			'~': Path.resolve(__dirname, '../src'),
 		},
 	},
-	plugins: [
-		new CleanWebpackPlugin(),
-		new CopyWebpackPlugin({
-			patterns: [{ from: Path.resolve(__dirname, '../public'), to: 'public' }],
-		}),
-		new Webpack.LoaderOptionsPlugin({
-			options: {
-				handlebarsLoader: {}
-			}
-		}),
-		new HtmlWebpackPlugin({
-			title: 'Custom template using Handlebars',
-			template: Path.resolve(__dirname, '../src/index.handlebars'),
-		}),
-	],
 	module: {
 		rules: [
+			{
+				test: /\.mjs$/,
+				include: /node_modules/,
+				type: 'javascript/auto',
+			},
 			{
 				test: /\.handlebars$/i,
 				loader: 'handlebars-loader',
@@ -50,14 +40,24 @@ module.exports = {
 				}, */
 			},
 			{
-				test: /\.mjs$/,
-				include: /node_modules/,
-				type: 'javascript/auto',
-			},
-			{
 				test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,
 				type: 'asset'
 			},
 		],
 	},
+	plugins: [
+		new Webpack.LoaderOptionsPlugin({
+			options: {
+				handlebarsLoader: {}
+			}
+		}),
+		new CleanWebpackPlugin(),
+		new CopyWebpackPlugin({
+			patterns: [{ from: Path.resolve(__dirname, '../public'), to: 'public' }],
+		}),
+		new HtmlWebpackPlugin({
+			title: 'Custom template using Handlebars',
+			template: Path.resolve(__dirname, '../src/index.handlebars'),
+		}),
+	],
 };
